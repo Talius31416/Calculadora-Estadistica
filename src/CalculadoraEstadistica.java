@@ -44,7 +44,7 @@ public class CalculadoraEstadistica {
                 elementoMasFrecuente = num;
             }
         }
-        if(elementoMasFrecuente == arr[1]){
+        if(maxRepeticiones == 1){
             return 0;
         }
 
@@ -66,6 +66,29 @@ public class CalculadoraEstadistica {
         float d = PosicionCuartil%1f;
         int Xi = (int) PosicionCuartil;
         return lista[Xi-1] + d*(lista[Xi]-lista[Xi-1]);
-
     }
+    public static float encontrapercentil(int percentil){
+        float Posicionpercentil = percentil*(lista.length+1)/100.0f;
+        float d = Posicionpercentil%1f;
+        int Xi = (int) Posicionpercentil;
+        return lista[Xi-1] + d*(lista[Xi]-lista[Xi-1]);
+    }
+    public static float hallarICR(){
+        return encontraCuartil(3)-encontraCuartil(2);
+    }
+    public static float[] hallarDatosAtipicos(){
+        float limiteSuperior = (float) (encontraCuartil(1)-1.5*hallarICR());
+        float LimiteInferior = (float) (encontraCuartil(3)+1.5*hallarICR());
+        float[] datosAtipicos = new float[10];
+        int contador = 0;
+        for(int i : lista){
+            if(i > limiteSuperior || i < LimiteInferior){
+                datosAtipicos[contador] = i;
+                contador++;
+            }
+        }
+        return datosAtipicos;
+    }
+
+
 }
