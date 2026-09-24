@@ -61,5 +61,11 @@ public class CalculadoraEstadistica {
     public float calcularDE(){
         return (float) Math.sqrt(calcularVarianza());
     }
+    public static float encontraCuartil(int cuartil){
+        float PosicionCuartil = cuartil*(lista.length+1)/4.0f;
+        float d = PosicionCuartil%1f;
+        int Xi = (int) PosicionCuartil;
+        return lista[Xi-1] + d*(lista[Xi]-lista[Xi-1]);
 
+    }
 }
